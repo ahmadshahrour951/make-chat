@@ -3,6 +3,7 @@ $(document).ready(() => {
   const socket = io.connect();
   let currentUser;
   socket.emit('get online users');
+  socket.emit('get available channels');
   //Each user should be in the general channel by default.
   socket.emit('user changed channel', 'General');
 
@@ -107,4 +108,12 @@ socket.on('new message', (data) => {
     `);
     });
   });
+
+    socket.on('get available channels', (channels) => {
+      for (channel in channels) {
+        if (channel !== 'General') {
+          $('.channels').append(`<div class="channel">${channel}</div>`);
+        }
+      }
+    });
 });

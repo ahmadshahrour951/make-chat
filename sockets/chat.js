@@ -51,4 +51,8 @@ module.exports = (io, socket, onlineUsers, channels) => {
       messages: channels[newChannel],
     });
   });
+
+  socket.on('get available channels', () => {
+    socket.emit('get available channels', channels);
+  });
 };
